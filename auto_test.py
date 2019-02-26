@@ -7,12 +7,12 @@ from watchdog.events import PatternMatchingEventHandler
 
 
 class AutoTest(PatternMatchingEventHandler):
-    patterns = ["*.py"]
+    patterns = ['*.py']
 
     def process(self, event):
         os.system('pytest')
 
-        now = datetime.datetime.now().strftime("%Y/%m/%d %I:%M %p")
+        now = datetime.datetime.now().strftime('%Y/%m/%d %I:%M %p')
         print(now)
 
     def on_modified(self, event):
