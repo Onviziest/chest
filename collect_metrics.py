@@ -5,6 +5,9 @@ Usage:
 1. Install `matplotlib` and `requests`
 2. Change the IP and the port in `prometheus_url` of `config`
 3. Create `metrics` directory
+
+You can also open the url in browser: 
+http://<ip>:<port>/graph?g0.range_input=15m&g0.expr=sum(irate(container_cpu_usage_seconds_total%7Bimage!%3D%22%22%2C%20image!%3D%22google%2Fcadvisor%3Alatest%22%7D%5B5s%5D))%20without%20(cpu)&g0.tab=0&g1.range_input=15m&g1.expr=container_memory_usage_bytes%7Bimage!%3D%22%22%2C%20image!%3D%22google%2Fcadvisor%3Alatest%22%7D&g1.tab=0&g2.range_input=15m&g2.expr=sum(rate(container_network_receive_bytes_total%7Bimage!%3D%22%22%2C%20image!%3D%22google%2Fcadvisor%3Alatest%22%7D%5B5s%5D))%20without%20(interface)&g2.tab=0&g3.range_input=15m&g3.stacked=0&g3.expr=sum(rate(container_network_transmit_bytes_total%7Bimage!%3D%22%22%2C%20image!%3D%22google%2Fcadvisor%3Alatest%22%7D%5B5s%5D))%20without%20(interface)&g3.tab=0&g4.range_input=15m&g4.expr=sum(rate(container_fs_reads_bytes_total%7Bimage!%3D%22%22%2C%20image!%3D%22google%2Fcadvisor%3Alatest%22%7D%5B5s%5D))%20without%20(device)&g4.tab=0&g5.range_input=15m&g5.expr=sum(rate(container_fs_writes_bytes_total%7Bimage!%3D%22%22%2C%20image!%3D%22google%2Fcadvisor%3Alatest%22%7D%5B5s%5D))%20without%20(device)&g5.tab=0
 """
 
 import time
