@@ -2,22 +2,24 @@
 Collect containers' metrics from Prometheus.
 
 Usage:
-1. Install `matplotlib`
+1. Install `matplotlib` and `requests`
 2. Change the IP and the port in `prometheus_url` of `config`
 3. Create `metrics` directory
 """
 
-from __future__ import annotations
-
 import time
 from datetime import datetime
-
 from multiprocessing import Process
+from typing import (
+    Callable,
+    List,
+)
+
 from requests import get
 import matplotlib.pyplot as plt
 
 config = dict(
-    prometheus_url='http://192.168.1.183:9090/api/v1/query_range',
+    prometheus_url='http://127.0.0.1:9090/api/v1/query_range',
     # 容器的 CPU 使用率
     cpu_usage_query='sum(irate(container_cpu_usage_seconds_total{image!="", image!="google/cadvisor:latest"}[5s])) without (cpu)',
     # 查询容器内存使用量（单位：字节）
@@ -70,7 +72,7 @@ def container_metrics(query):
     return data
 
 
-def save_plot(plot_id, plot_type, function_for_parsing_metric, title):
+def save_plot(plot_id, plot_type, function_for_parsing_metric: Callable, title):
     fp = function_for_parsing_metric
 
     queries = dict(
@@ -169,7 +171,7 @@ def save_fs_write_plot():
     save_plot(id, type, float_of_mb, title)
 
 
-def multi_process(tasks):
+def multi_process(tasks: List[Callable]):
     ps = []
     for t in tasks:
         n = t.__name__
