@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eux
 
-arguments=$@
+arguments=("$@")
 
 __main(){
     echo ${arguments}
